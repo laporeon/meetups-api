@@ -5,6 +5,9 @@
   "repository": "https://github.com/laporeon/meetups-api.git",
   "author": "Laíse Carvalho <34722707+laporeon@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/server.js"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
