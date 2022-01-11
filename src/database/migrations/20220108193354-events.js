@@ -3,8 +3,17 @@ module.exports = {
     await queryInterface.createTable("events", {
       id: {
         type: Sequelize.UUID,
-        allowNull: false,
         primaryKey: true,
+      },
+      category_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "categories",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       name: {
         type: Sequelize.STRING,
@@ -30,6 +39,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
