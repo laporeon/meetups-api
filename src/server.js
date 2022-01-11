@@ -6,6 +6,7 @@ const cors = require("cors");
 const eventRoutes = require("./routes/event.routes");
 const adminRoutes = require("./routes/admin.routes");
 const tokenRoutes = require("./routes/token.routes");
+const categoriesRoutes = require("./routes/categories.routes");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/event", eventRoutes);
 app.use("/admin", adminRoutes);
 app.use("/auth", tokenRoutes);
+app.use("/categories", categoriesRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
