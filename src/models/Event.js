@@ -33,12 +33,20 @@ class Event extends Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        category_id: {
+          type: Sequelize.UUID,
+          allowNull: false,
+        },
       },
       {
         sequelize,
       }
     );
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Category);
   }
 }
 

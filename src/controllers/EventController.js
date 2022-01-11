@@ -1,17 +1,32 @@
 const Event = require("../models/Event");
+const Category = require("../models/Category");
 
 class EventController {
   async list(req, res) {
     try {
-      const events = await Event.findAll({});
+      const events = await Event.findAll({
+        attributes: [
+          "id",
+          "name",
+          "description",
+          "location",
+          "starts_at",
+          "finishes_at",
+        ],
+        include: {
+          model: Category,
+          attributes: ["category_name"],
+        },
+      });
 
       if (events.length <= 0)
         return res.status(404).json({ error: "No events were found." });
 
       return res.status(200).json(events);
     } catch (error) {
+      console.log(error);
       return res.status(404).json({
-        errors: e.errors.map((err) => err.message),
+        errors: error.errors.map((err) => err.message),
       });
     }
   }
@@ -24,7 +39,17 @@ class EventController {
         vacancy_limit,
         starts_at,
         finishes_at,
+        category_id,
       } = req.body;
+
+      const categoryExists = await Category.findOne({
+        where: {
+          id: category_id,
+        },
+      });
+
+      if (!categoryExists)
+        return res.status(404).json({ error: "Category not found" });
 
       const newEvent = await Event.create({
         name,
@@ -33,6 +58,7 @@ class EventController {
         vacancy_limit,
         starts_at,
         finishes_at,
+        category_id,
       });
 
       return res.status(201).json(newEvent);
