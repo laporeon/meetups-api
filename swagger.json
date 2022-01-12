@@ -1,0 +1,141 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tasks API",
+    "description": "A sample API that simulates a management system for online events.",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/event": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Return events",
+        "description": "Return all events stored at database, including their category.",
+        "responses": {
+          "200": {
+            "description": "A list of events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "date"
+                      },
+                      "location": {
+                        "type": "string"
+                      },
+                      "starts_at": {
+                        "type": "string"
+                      },
+                      "finishes_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Events"],
+        "summary": "Create an event.",
+        "description": "Create a new event.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Learning Node.js"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Learn Node.js basics."
+                  },
+                  "location": {
+                    "type": "string",
+                    "example": "Discord"
+                  },
+                  "starts_at": {
+                    "type": "string",
+                    "example": "2022-02-01 09:00"
+                  },
+                  "finishes_at": {
+                    "type": "string",
+                    "example": "2022-02-01 12:00"
+                  },
+                  "category_id": {
+                    "type": "string",
+                    "example": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Validation error."
+          }
+        }
+      }
+    },
+    "/event/{id}": {
+      "delete": {
+        "tags": ["Events"],
+        "summary": "Delete an event.",
+        "description": "Delete an event based on its primary key.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
+}
