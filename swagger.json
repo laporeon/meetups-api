@@ -136,6 +136,67 @@
           }
         }
       }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Return categories",
+        "description": "Return all categories stored at database, including their events.",
+        "responses": {
+          "200": {
+            "description": "A list of categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "category_name": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Category"],
+        "summary": "Create a category.",
+        "description": "Create a new category.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_name": {
+                    "type": "string",
+                    "example": "Backend"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Validation error."
+          }
+        }
+      }
     }
   }
 }
