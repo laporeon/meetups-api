@@ -197,6 +197,49 @@
           }
         }
       }
+    },
+    "/categories/{id}": {
+      "delete": {
+        "tags": ["Category"],
+        "summary": "Delete a category.",
+        "description": "Delete a category based on its primary key.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "$01": {
+            "description": "Login required."
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
     }
   }
 }
